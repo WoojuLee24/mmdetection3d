@@ -63,6 +63,9 @@ def parse_args():
     parser.add_argument('--local_rank', '--local-rank', type=int, default=0)
     parser.add_argument(
         '--test_c', action='store_true', help='test corruption')
+    parser.add_argument(
+        '--save_result', default='log', type=str, help='save result')
+    )
     args = parser.parse_args()
     if 'LOCAL_RANK' not in os.environ:
         os.environ['LOCAL_RANK'] = str(args.local_rank)
@@ -186,7 +189,7 @@ def main():
         for key, value in total_dict.items():
             print(f'{key}: {value}')
 
-        with open('/ws/external/log.txt', 'w') as f:
+        with open(f'/ws/external/work_dirs/{args.log}.txt', 'w') as f:
             for key, value in total_dict.items():
                 f.write(f'{key}: {value}\n')
 
