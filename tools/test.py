@@ -142,7 +142,30 @@ def main():
         runner = RUNNERS.build(cfg)
 
     # start testing
-    runner.test()
+    metric_dict = runner.test()
+    print(metric_dict)
+
+    total_dict = dict()
+    for key in metric_dict.keys():
+        if 'Car_3D_AP40_moderate_strict' in key:
+            total_dict[key] = metric_dict[key]
+        elif 'Pedestrian_3D_AP40_moderate_loose' in key:
+            total_dict[key] = metric_dict[key]
+        elif 'Cyclist_3D_AP40_moderate_loose' in key:
+            total_dict[key] = metric_dict[key]
+        elif 'Car_2D_AP40_moderate_strict' in key:
+            total_dict[key] = metric_dict[key]
+        elif 'Pedestrian_2D_AP40_moderate_loose' in key:
+            total_dict[key] = metric_dict[key]
+        elif 'Cyclist_2D_AP40_moderate_loose' in key:
+            total_dict[key] = metric_dict[key]
+
+    for key, value in total_dict.items():
+        print(f'{key}: {value}')
+    
+    with open('/ws/external/log.txt', 'w') as f:
+        for key, value in total_dict.items():
+            f.write(f'{key}: {value}\n')
 
 
 if __name__ == '__main__':

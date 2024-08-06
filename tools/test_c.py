@@ -144,6 +144,8 @@ def main():
             # for severity in range(5):
             severity = 2
             cfg.test_dataloader.dataset.data_prefix['img'] = f'val_c/{corruption}/{severity+1}'
+            if corruption in ['fog', 'snow', 'motion_blur']:
+                cfg.test_dataloader.dataset.data_prefix['pts'] = f'val_c/{corruption}/moderate/velodyne'
 
             # build the runner from config
             if 'runner_type' not in cfg:
