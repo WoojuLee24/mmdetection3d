@@ -64,8 +64,8 @@ def parse_args():
     parser.add_argument(
         '--test_c', action='store_true', help='test corruption')
     parser.add_argument(
-        '--save_result', default='log', type=str, help='save result')
-    
+        '--log', default='log', type=str, help='save result')
+
     args = parser.parse_args()
     if 'LOCAL_RANK' not in os.environ:
         os.environ['LOCAL_RANK'] = str(args.local_rank)
