@@ -278,3 +278,6 @@ visualizer = dict(
 # load_from = 'https://download.openmmlab.com/mmdetection3d/pretrain_models/mvx_faster_rcnn_detectron2-caffe_20e_coco-pretrain_gt-sample_kitti-3-class_moderate-79.3_20200207-a4a6a3c7.pth'  # noqa
 load_from = '/ws/external/checkpoints/mvxnet_fpn_dv_second_secfpn_8xb2-80e_kitti-3d-3class-8963258a.pth'
 checkpoint_config = dict(interval=1)
+
+default_hooks = dict(checkpoint=dict(type='CheckpointHook', interval=1, max_keep_ckpts=5))
+

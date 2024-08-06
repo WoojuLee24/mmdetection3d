@@ -171,7 +171,7 @@ param_scheduler = [
 ]
 
 # hooks
-default_hooks = dict(checkpoint=dict(type='CheckpointHook', max_keep_ckpts=1))
+default_hooks = dict(checkpoint=dict(type='CheckpointHook', interval=1, max_keep_ckpts=5))
 
 # runtime
 find_unused_parameters = True  # only 1 of 4 FPN outputs is used
@@ -181,4 +181,3 @@ visualizer = dict(
     type='Det3DLocalVisualizer', vis_backends=vis_backends, name='visualizer')
 
 load_from = '/ws/external/checkpoints/imvoxelnet_4x8_kitti-3d-car_20210830_003014-3d0ffdf4.pth'
-checkpoint_config = dict(interval=1)

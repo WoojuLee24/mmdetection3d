@@ -171,9 +171,22 @@ def main():
                 elif 'Cyclist_3D_AP40_moderate_loose' in key:
                     new_key = f"{corruption}/{key.split('/')[-1]}"
                     total_dict[new_key] = metric_dict[key]
+                elif 'Car_2D_AP40_moderate_strict' in key:
+                    new_key = f"{corruption}/{key.split('/')[-1]}"
+                    total_dict[new_key] = metric_dict[key]
+                elif 'Pedestrian_2D_AP40_moderate_loose' in key:
+                    new_key = f"{corruption}/{key.split('/')[-1]}"
+                    total_dict[new_key] = metric_dict[key]
+                elif 'Cyclist_2D_AP40_moderate_loose' in key:
+                    new_key = f"{corruption}/{key.split('/')[-1]}"
+                    total_dict[new_key] = metric_dict[key]
 
         for key, value in total_dict.items():
             print(f'{key}: {value}')
+
+        with open('/ws/external/log.txt', 'w') as f:
+            for key, value in total_dict.items():
+                f.write(f'{key}: {value}\n')
 
 if __name__ == '__main__':
     main()
