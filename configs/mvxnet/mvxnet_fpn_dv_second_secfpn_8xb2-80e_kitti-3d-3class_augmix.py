@@ -159,6 +159,11 @@ train_pipeline = [
     dict(
         type='RandomResize', scale=[(640, 192), (2560, 768)], keep_ratio=True),
     dict(
+        type='AugMix',
+        mean=model['data_preprocessor']['mean'], std=model['data_preprocessor']['std'],
+        aug_list='wotrans', no_jsd=True, aug_severity=10,
+    ),
+    dict(
         type='GlobalRotScaleTrans',
         rot_range=[-0.78539816, 0.78539816],
         scale_ratio_range=[0.95, 1.05],
@@ -270,4 +275,6 @@ visualizer = dict(
     type='Det3DLocalVisualizer', vis_backends=vis_backends, name='visualizer')
 
 # You may need to download the model first is the network is unstable
-load_from = 'https://download.openmmlab.com/mmdetection3d/pretrain_models/mvx_faster_rcnn_detectron2-caffe_20e_coco-pretrain_gt-sample_kitti-3-class_moderate-79.3_20200207-a4a6a3c7.pth'  # noqa
+# load_from = 'https://download.openmmlab.com/mmdetection3d/pretrain_models/mvx_faster_rcnn_detectron2-caffe_20e_coco-pretrain_gt-sample_kitti-3-class_moderate-79.3_20200207-a4a6a3c7.pth'  # noqa
+load_from = '/ws/external/checkpoints/mvxnet_fpn_dv_second_secfpn_8xb2-80e_kitti-3d-3class-8963258a.pth'
+checkpoint_config = dict(interval=1)

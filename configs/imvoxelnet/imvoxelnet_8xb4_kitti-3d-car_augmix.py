@@ -93,6 +93,11 @@ train_pipeline = [
     dict(
         type='RandomResize', scale=[(1173, 352), (1387, 416)],
         keep_ratio=True),
+    dict(
+        type='AugMix',
+        mean=model['data_preprocessor']['mean'], std=model['data_preprocessor']['std'],
+        aug_list='wotrans', no_jsd=True, aug_severity=10,
+    ),
     dict(type='ObjectRangeFilter', point_cloud_range=point_cloud_range),
     dict(type='Pack3DDetInputs', keys=['img', 'gt_bboxes_3d', 'gt_labels_3d'])
 ]
@@ -174,3 +179,6 @@ find_unused_parameters = True  # only 1 of 4 FPN outputs is used
 vis_backends = [dict(type='LocalVisBackend')]
 visualizer = dict(
     type='Det3DLocalVisualizer', vis_backends=vis_backends, name='visualizer')
+
+load_from = '/ws/external/checkpoints/imvoxelnet_4x8_kitti-3d-car_20210830_003014-3d0ffdf4.pth'
+checkpoint_config = dict(interval=1)

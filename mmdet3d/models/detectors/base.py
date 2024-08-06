@@ -71,8 +71,10 @@ class Base3DDetector(BaseDetector):
             - If ``mode="predict"``, return a list of :obj:`Det3DDataSample`.
             - If ``mode="loss"``, return a dict of tensor.
         """
+
         if mode == 'loss':
-            return self.loss(inputs, data_samples, **kwargs)
+            losses = self.loss(inputs, data_samples, **kwargs)
+            return losses
         elif mode == 'predict':
             if isinstance(data_samples[0], list):
                 # aug test
@@ -83,7 +85,8 @@ class Base3DDetector(BaseDetector):
                                                   'time augmentation.'
                 return self.aug_test(inputs, data_samples, **kwargs)
             else:
-                return self.predict(inputs, data_samples, **kwargs)
+                predictions = self.predict(inputs, data_samples, **kwargs)
+                return predictions
         elif mode == 'tensor':
             return self._forward(inputs, data_samples, **kwargs)
         else:
@@ -150,3 +153,4 @@ class Base3DDetector(BaseDetector):
             data_sample.pred_instances_3d = data_instances_3d[i]
             data_sample.pred_instances = data_instances_2d[i]
         return data_samples
+
