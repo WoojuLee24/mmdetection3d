@@ -252,10 +252,10 @@ class AugMix:
         if self.no_jsd:
             img = results['img'].copy()
             results['img'] = self.aug(img)
-            aug = Image.fromarray(results['img'].astype(np.uint8))
-            aug.save('/ws/external/vis/aug.png')
-            im = Image.fromarray(img.astype(np.uint8))
-            im.save('/ws/external/vis/ori.png')
+            # aug = Image.fromarray(results['img'].astype(np.uint8))
+            # aug.save('/ws/external/vis/aug.png')
+            # im = Image.fromarray(img.astype(np.uint8))
+            # im.save('/ws/external/vis/ori.png')
             return results
         elif self.aug_list == 'copy':
             img = results['img'].copy()
