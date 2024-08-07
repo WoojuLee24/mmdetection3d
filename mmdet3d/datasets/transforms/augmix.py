@@ -252,6 +252,10 @@ class AugMix:
         if self.no_jsd:
             img = results['img'].copy()
             results['img'] = self.aug(img)
+            aug = Image.fromarray(results['img'].astype(np.uint8))
+            aug.save('/ws/external/vis/aug.png')
+            im = Image.fromarray(img.astype(np.uint8))
+            im.save('/ws/external/vis/ori.png')
             return results
         elif self.aug_list == 'copy':
             img = results['img'].copy()
@@ -290,9 +294,9 @@ class AugMix:
                 if isinstance(outputs, dict):
                     image_aug = outputs['img']
                 elif isinstance(outputs, tuple):
-                    images_aug = outputs[0]
+                    image_aug = outputs[0]
                 else:
-                    images_aug = outputs
+                    image_aug = outputs
             # Preprocessing commutes since all coefficients are convex
             image_aug = np.asarray(image_aug, dtype=np.float32)
             mix += ws[i] * image_aug
